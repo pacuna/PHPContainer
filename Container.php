@@ -1,5 +1,5 @@
 <?php
-
+require 'Config.php';
 
 class Container{
     private $entries = array();
@@ -7,7 +7,7 @@ class Container{
     //load the dependecies declarated in dependencies.php
     public function __construct()
     {
-        $this->entries = include('dependencies.php');
+        $this->entries = Config::load('dependencies.php');
     }
 
     //get instance of a class
