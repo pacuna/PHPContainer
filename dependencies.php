@@ -1,4 +1,6 @@
 <?php
-return array(
-    'SomeInterface' => 'D'
-);
+
+//example
+//return array(
+    //'SomeInterface' => 'D'
+//);
