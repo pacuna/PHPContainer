@@ -1,6 +1,5 @@
 PHPContainer
 ============
 
-Basic php dependency injector (by constructor)
+Basic php dependency injector (constructor)
 
-see test.php 
