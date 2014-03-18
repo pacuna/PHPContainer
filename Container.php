@@ -56,6 +56,10 @@ class Container{
     //return dependency for a class
     public function getEntryDependency($entry)
     {
+        if(!isset($this->entries[$entry])){
+            throw new Exception("Entry not found in the container.");
+        }
+
         return $this->entries[$entry];
     }
 

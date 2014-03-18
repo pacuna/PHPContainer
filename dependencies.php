@@ -4,3 +4,5 @@
 //return array(
     //'SomeInterface' => 'D'
 //);
+return array(
+);

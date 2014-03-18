@@ -5,12 +5,17 @@ require __DIR__.'/../Container.php';
 
 class ContainerTest extends PHPUnit_Framework_TestCase
 {
+
+    protected $container;
+    public function setUp()
+    {
+        $this->container = new Container();
+    }
     //tests if can create an instance of Class A
     //that has a constructor dependency on class B
     public function testCanResolveSimpleClass()
     {
-        $container = new Container();
-        $classA = $container->getInstance('A');
+        $classA = $this->container->getInstance('A');
         $this->assertInstanceOf('A', $classA);
     }
 
@@ -18,8 +23,7 @@ class ContainerTest extends PHPUnit_Framework_TestCase
     //which has another constructor dependency on class D
     public function testItCanResolveRecursively()
     {
-        $container = new Container();
-        $classB = $container->getInstance('B');
+        $classB = $this->container->getInstance('B');
         $this->assertInstanceOf('B', $classB);
     }
 
@@ -29,9 +33,17 @@ class ContainerTest extends PHPUnit_Framework_TestCase
     //the resolution
     public function testItCanResolveInterfaceInjection()
     {
-        $container = new Container();
-        $container->bind('SomeInterface', 'F');
-        $classE = $container->getInstance('E');
+        $this->container->bind('SomeInterface', 'F');
+        $classE = $this->container->getInstance('E');
         $this->assertInstanceOf('E', $classE);
+    }
+
+    /**
+     * @expectedException Exception
+     * @expectedExceptionMessage Entry not found in the container.
+     */
+    public function testItThrowsExceptionWhenCannotFoundDependency()
+    {
+        $this->container->getEntryDependency('NotDeclarated');
     }
 }
